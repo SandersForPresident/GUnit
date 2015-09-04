@@ -5,7 +5,6 @@ import os
 import re
 import requests
 
-
 app = Flask(__name__)
 
 @app.route("/<doc_id>/")
@@ -23,7 +22,6 @@ def dump(doc_id):
     response.headers['Content-type'] = 'text/json'
 
     return response
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
