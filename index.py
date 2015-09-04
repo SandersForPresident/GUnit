@@ -18,8 +18,6 @@ def dump(doc_id):
     fields      = [re.sub(r'\W+', '_', field.lower()) for field in csv_file.split("\r\n")[0].split(",")]
     reader      = csv.DictReader(csv_file.split("\r\n")[1:], fields)
 
-    json_data   = []
-
     return json.dumps([row for row in reader])
 
 if __name__ == "__main__":
