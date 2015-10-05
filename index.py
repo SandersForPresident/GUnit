@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, request, Response
 import csv
 import json
 import os
@@ -13,8 +13,10 @@ def dump(doc_id):
     CSV_URL         = "http://docs.google.com/feeds/download/spreadsheets/Export?key=%s&exportFormat=csv&gid=0" % doc_id
     csv_file        = requests.get(CSV_URL).text
 
-    fields          = [re.sub(r'\W+', '_', field.lower()) for field in csv_file.split("\r\n")[0].split(",")]
-    reader          = csv.DictReader(csv_file.split("\r\n")[1:], fields)
+    fields_row      = int(request.args.get('fields_row', 0))
+
+    fields          = [re.sub(r'\W+', '_', field.lower()) for field in csv_file.split("\r\n")[fields_row].split(",")]
+    reader          = csv.DictReader(csv_file.split("\r\n")[fields_row+1:], fields)
     
     response_body   = json.dumps([row for row in reader])
 
