@@ -1,9 +1,15 @@
+# -*- coding: utf-8 -*-
+
 from flask import Flask, request, Response
 import csv
 import json
 import os
 import re
 import requests
+
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 app = Flask(__name__)
 
